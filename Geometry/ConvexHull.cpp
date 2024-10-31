@@ -1,21 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <list>
-#include <stack>
-#include <queue>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <cstring>
-#include <iomanip>
+#include <bits/stdc++.h>
 using namespace std;
 #define int long long
 typedef long long ll;
@@ -59,10 +42,8 @@ bool cmp2(Point A,Point B){
 void solve()
 {
     int n;
-    cin >> n;
-    for (int i = 1;i<=n;i++){
-        cin >> point[i].x >> point[i].y;
-    }
+    //这一段把点输入到point数组就可以了
+    //n表示点的数量
     sort(point+1,point+1+n,cmp1);
     sort(point+1+1,point+1+n,cmp);
     q[++tp] = point[1];
@@ -87,25 +68,13 @@ void solve()
         tp = ans + 1;
         q[tp] = point[i];
     }
+
     double ans = 0;
-    // cout<<tp<<endl;
     for (int i = 1;i<=tp-1;i++){
         ans +=(q[i+1]-q[i]).dis();
     }
     ans += (q[tp] - q[1]).dis();
+
     cout<< fixed << setprecision(2)<< ans;
     return;
-}
-signed main()
-{
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
-    ios::sync_with_stdio(0), cin.tie(nullptr), cout.tie(0);
-    int t = 1;
-    // cin >> t;
-    while (t--)
-    {
-        solve();
-    }
-    return 0;
 }

@@ -19,6 +19,7 @@
 using namespace std;
 #define int long long
 typedef long long ll;
+const double PI = 3.1415926;
 struct Point{
     double x,y;
     Point(double X = 0,double Y = 0){
@@ -58,8 +59,8 @@ bool cmp2(Point A,Point B){
 }
 void solve()
 {
-    int n;
-    cin >> n;
+    int n,l;
+    cin >> n >>l;
     for (int i = 1;i<=n;i++){
         cin >> point[i].x >> point[i].y;
     }
@@ -93,12 +94,13 @@ void solve()
         ans +=(q[i+1]-q[i]).dis();
     }
     ans += (q[tp] - q[1]).dis();
-    cout<< fixed << setprecision(2)<< ans;
+    // ans += 2*PI*l;
+    cout << (ll)(ans+0.5);
     return;
 }
 signed main()
 {
-    // freopen("input.txt", "r", stdin);
+    freopen("input.txt", "r", stdin);
     // freopen("output.txt", "w", stdout);
     ios::sync_with_stdio(0), cin.tie(nullptr), cout.tie(0);
     int t = 1;

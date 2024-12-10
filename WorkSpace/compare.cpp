@@ -7,7 +7,7 @@ int main()
     system("g++ -o prog1 main.cpp");
     system("g++ -o prog2 burst.cpp");
 
-    for (int i = 0; i < 10000; ++i) 
+    for (int i = 0; i < 100000; ++i) 
     {
         system("gen > input.txt");               
         system("prog1 < input.txt > output1.txt"); 

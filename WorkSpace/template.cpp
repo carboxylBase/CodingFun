@@ -1,20 +1,18 @@
+// It's a wonderful life.
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
 typedef long long ll;
-void solve()
-{
+#define DEBUG 1
+
+void solve(){
     return;
 }
-signed main()
-{
-    freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
-    ios::sync_with_stdio(0), cin.tie(nullptr), cout.tie(0);
-    int t = 1;
-    cin >> t;
-    while (t--)
-    {
+
+signed main(){
+    freopen("input.txt","r",stdin);
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    int _ = 1;
+    while (_--){
         solve();
     }
     return 0;

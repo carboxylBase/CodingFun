@@ -4,18 +4,15 @@ using namespace std;
 typedef long long ll;
 const double PI = 3.1415926;
 struct Point {
-    int x, y,inde;
-    Point(int X = 0, int Y = 0) {
+    ll x, y,inde;
+    Point(ll X = 0, ll Y = 0) {
         x = X, y = Y;
     }
     Point operator-(const Point& A) {
         return Point(x - A.x, y - A.y);
     }
-    int operator^(const Point& A) {
+    ll operator^(const Point& A) {
         return x * A.y - A.x * y;
-    }
-    double dis() {
-        return pow(x * x + y * y,0.5);
     }
     ll dis2() {
         return x * x + y * y;
@@ -27,7 +24,7 @@ bool cmp(Point& A, Point& B,Point& C) {
     if ((a ^ b) < 0) {
         return 1;
     } else if (abs(a ^ b) <= 0) {
-        return a.dis() < b.dis();
+        return a.dis2() < b.dis2();
     }
     return 0;
 }
@@ -44,7 +41,7 @@ class ConvexHull{
             q.push_back(p);
         }
         vector<Point> st;
-        int tp = 0;
+        __int128 tp = 0;
         void findHull(){
             sort(q.begin(),q.end(),[&](Point& A,Point& B){
                 return cmp1(A,B);
@@ -55,7 +52,7 @@ class ConvexHull{
             st.resize(q.size()*2);
             st[tp++] = q[0],st[tp] = q[1]; 
             for (int i = 2;i<q.size();i++){
-                int l = 1, r = tp, mid, ans = 1;
+                __int128 l = 1, r = tp, mid, ans = 1;
                 while (l <= r) {
                     mid = (l + r) >> 1;
                     Point a = st[mid] - st[mid - 1];
@@ -74,16 +71,20 @@ class ConvexHull{
         double C(){
             double sum = 0;
             for (int i = 0;i<=tp-1;i++){
-                sum += (st[i+1]-st[i]).dis();
+                sum += (st[i+1]-st[i]).dis2();
             }
-            sum += (st[0]-st[tp]).dis();
+            sum += (st[0]-st[tp]).dis2();
             return sum;
         }
         //注意，这个返回的是二倍面积。
-        ll S(){
-            ll sum = 0;
+        __int128 S(){
+            __int128 sum = 0;
             for (int i = 2;i<q.size();i++){
-                sum += abs((st[i]-st[0])^(st[i-1]-st[0]));
+                __int128 s = (st[i]-st[0])^(st[i-1]-st[0]);
+                if (s<0){
+                    s = -s;
+                }
+                sum += s;
             }
             return sum;
         }

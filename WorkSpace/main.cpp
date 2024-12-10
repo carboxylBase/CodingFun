@@ -1,112 +1,64 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <list>
-#include <stack>
-#include <queue>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <cstring>
-#include <iomanip>
+// It's a wonderful life.
+#include <bits/stdc++.h>
 using namespace std;
-#define int long long
 typedef long long ll;
-const double PI = 3.1415926;
-struct Point{
-    double x,y;
-    Point(double X = 0,double Y = 0){
-        x = X,y = Y;
+#define DEBUG 
+
+const ll N = 2000000;
+ll d[N],dep[N],fa[N];
+
+void solve(){
+    int n,q;
+    cin >> n >> q;
+    vector<vector<int>> g(n);
+    for (int i = 0;i<n-1;i++){
+        int u,v;
+        cin >> u >> v;
+        u--,v--;
+        g[u].push_back(v),g[v].push_back(u);
     }
-    Point operator-(const Point& A){
-        return Point(x-A.x,y-A.y);
-    }
-    double operator^(const Point& A){
-        return x*A.y-A.x*y;
-    }
-    double dis(){
-        return pow(x*x+y*y,0.5);
-    }
-}point[2000000];
-Point q[2000000];
-int tp;
-bool cmp(Point A,Point B){
-    Point a = A - point[1];
-    Point b = B - point[1];
-    if ((a^b) < 0){
-        return 1;
-    }else if (abs(a^b)<=0.000001){
-        return a.dis() < b.dis();
-    }
-    return 0;
-}
-bool cmp1(Point A,Point B){
-    if (A.y != B.y)
-        return A.y < B.y;
-    return A.x < B.x;
-}
-bool cmp2(Point A,Point B){
-    if (A.x != B.x)
-        return A.x < B.x;
-    return A.y < B.y;
-}
-void solve()
-{
-    int n,l;
-    cin >> n >>l;
-    for (int i = 1;i<=n;i++){
-        cin >> point[i].x >> point[i].y;
-    }
-    sort(point+1,point+1+n,cmp1);
-    sort(point+1+1,point+1+n,cmp);
-    q[++tp] = point[1];
-    q[++tp] = point[2];
-    for (int i = 3;i<n+1;i++){
-        int l = 2,r = tp,mid,ans=1;
-        bool ok = 1;
-        while (l<=r){
-            mid = l + r >> 1;
-            Point a = (q[mid] - q[mid-1]);
-            Point b = point[i] - q[mid];
-            if ((b^a)>=0){
-                ans = mid;
-                l = mid + 1;
-            }else{
-                r = mid - 1;
+
+    function<void(int,int)> dfs = [&](int u,int p){
+        for (auto v:g[u]){
+            if (v == p) continue;
+            dep[v] = dep[u] + 1;
+            fa[v] = u;
+            if (dep[v] == 1){
+                d[v] = 1;
+            }else if (dep[v] > 1){
+                d[v] = d[fa[u]] + int(g[u].size()) * 2;
             }
+            dfs(v,u);
         }
-        if (!ok){
-            continue;
+    };
+    dfs(0,0);
+
+    while (q--){
+        int u,p;
+        cin >> u >> p;
+        u--;
+        vector<int> cnt;
+        ll ans = d[u];
+        while (fa[u] && u){
+            cnt.push_back(g[fa[u]].size());
+            u = fa[fa[u]];
         }
-        tp = ans + 1;
-        q[tp] = point[i];
+        sort(cnt.rbegin(),cnt.rend());
+        for (int i = 0;i<min(p,(int)cnt.size());i++){
+            ans -= 2 * (cnt[i] - 1);
+        }
+        cout << ans << endl;
     }
-    double ans = 0;
-    // cout<<tp<<endl;
-    for (int i = 1;i<=tp-1;i++){
-        ans +=(q[i+1]-q[i]).dis();
-    }
-    ans += (q[tp] - q[1]).dis();
-    // ans += 2*PI*l;
-    cout << (ll)(ans+0.5);
+
     return;
 }
-signed main()
-{
-    freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
-    ios::sync_with_stdio(0), cin.tie(nullptr), cout.tie(0);
-    int t = 1;
-    // cin >> t;
-    while (t--)
-    {
+
+signed main(){
+    // freopen("input.txt","r",stdin);
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    int _ = 1;
+    cin >> _;
+    while (_--){
         solve();
     }
     return 0;

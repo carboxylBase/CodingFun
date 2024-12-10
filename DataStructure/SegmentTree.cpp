@@ -1,8 +1,61 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
+const ll N = 2000000;
 class SegTree{
+public:
+    struct Node{
+        
+    }nodes[N*4];
+    #define ls (rt << 1)
+    #define rs (rt << 1 | 1)
+    Node merge(Node L,Node R){
+        Node M;
+        return M;
+    }
+    void build(int rt,int l,int r){
+        if (l == r){
+            return;
+        }
+        int mid = l + r >> 1;
+        build(ls,l,mid),build(rs,mid+1,r);
+        nodes[rt] = merge(nodes[ls],nodes[rs]);
+    }
+    void pd(int rt){
+
+    }
+    void update(int rt,int l,int r,int ql,int qr){
+        if (ql <= l && r <= qr){
+            return;
+        }
+        int mid = l+r>>1;
+        pd(rt);
+        if (ql <= mid){
+            update(ls,l,mid,ql,qr);
+        }
+        if (qr >= mid + 1){
+            update(rs,mid+1,r,ql,qr);
+        }
+        nodes[rt] = merge(nodes[ls],nodes[rs]);
+        return;
+    }
+    Node query(int rt,int l,int r,int ql,int qr){
+        if (ql <= l && r <= qr){
+            return nodes[rt];
+        }
+        int mid = l+r>>1;
+        pd(rt);
+        if (ql > mid){
+            return query(rs,mid+1,r,ql,qr);
+        }else if (qr < mid + 1){
+            return query(ls,l,mid,ql,qr);
+        }else{
+            return merge(query(ls,l,mid,ql,qr),query(rs,mid+1,r,ql,qr));
+        }
+    }
+};
+
+class SegTree_plus_mul{
     #define ls (rt << 1)
     #define rs (rt << 1 | 1)
     struct Node{

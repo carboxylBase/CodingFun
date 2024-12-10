@@ -1,26 +1,24 @@
-#include <bits/stdc++.h>
+#include<iostream>
+#include<time.h>
 using namespace std;
-
-int main(){
+typedef long long ll;
+int main()
+{
+    // freopen("input.txt","w",stdout);
     srand(time(0));
-    int _ = 5;
-    cout<<_<<endl;
-    while (_--){
- int n = rand()%5+1;
-    int m = rand()%10+1;
-    cout<<n<<" "<<m<<endl;
-    for (int i = 1;i<=n;i++){
-        cout<<rand()%6+1<<" ";
-    }
-    cout<<endl;
-    int x= 1;
-    int t = rand()%n+1;
-    cout<<x<<" "<<t<<endl;
-    for (int i = 1;i<m;i++){
-        x += rand()%5+1;
-        cout<<x<<" "<<rand()%n+1<<endl;
-    }
-    }
-   
+    cout << rand() % 10000000 + 2 << endl;
     return 0;
 }
+
+// Tree
+// int main()
+// {
+//     // freopen("input.txt","w",stdout);
+//     srand(time(0));
+//     int n = rand() % 5 + 1;
+//     cout << n << endl;
+//     for (int i = 2;i<=n;i++){
+//         cout << i << " " << rand() % (i-1) + 1 << endl;
+//     }
+//     return 0;
+// }

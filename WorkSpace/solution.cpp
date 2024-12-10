@@ -1,40 +1,61 @@
 #include <bits/stdc++.h>
+ 
 using namespace std;
-const int MAX = 200'007;
-const int MOD = 1'000'000'007;
-
+ 
 void solve() {
-	int l = 1, r = 999;
-	while (r - l > 2) {
-		int a = (2 * l + r) / 3;
-		int b = (2 * r + l) / 3;
-		cout << "? " << a << ' ' << b << endl;
-		int resp; cin >> resp;
-		
-		if (resp == (a + 1) * (b + 1)) {
-			r = a;
-		}
-		else if (resp == a * b) {
-			l = b;
-		}
-		else {
-			l = a; r = b;
-		}
-	}
-	if (r - l == 2) {
-		cout << "? 1 " << l + 1 << endl;
-		int resp; cin >> resp;
-		
-		if (resp == l + 1) {l = l + 1;}
-		else {r = l + 1;}
-		
-	}
-	cout << "! " << r << endl;
+    int n, q;
+    cin >> n >> q;
+    
+    vector < vector <int> > g(n);
+    for (int i = 0; i < n - 1; i++) {
+        int u, v;
+        cin >> u >> v;
+        u--, v--;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    
+    vector <int> depth(n);
+    vector <int> d(n);
+    vector <int> par(n);
+ 
+    function <void(int, int)> dfs = [&](int v, int p) {
+        if (depth[v] == 1) d[v] = 1;
+        if (depth[v] > 1) d[v] = d[par[p]] + 2 * (int)g[p].size();
+        par[v] = p;
+        for(int to : g[v]) {
+            if (to == p) continue;
+            depth[to] = depth[v] + 1;
+            dfs(to, v);
+        }
+    };
+    
+    dfs(0, 0);
+    
+    while (q--) {
+        int v, p;
+        cin >> v >> p;
+        v--;
+        int res = d[v];
+        vector <int> cnt;
+        while (v != 0 && par[v] != 0) {
+            cnt.push_back((int)g[par[v]].size());
+            v = par[par[v]];
+        }
+        sort(cnt.rbegin(), cnt.rend());
+        for (int i = 0; i < min(p, (int)cnt.size()); i++) {
+            res -= 2 * (cnt[i] - 1);
+        }
+        cout << res << '\n';
+    }
 }
-
+ 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	int tt; cin >> tt; for (int i = 1; i <= tt; i++) {solve();}
-	// solve();
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        solve();
+    }
+ 
+    return 0;
 }

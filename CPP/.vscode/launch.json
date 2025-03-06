@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/ComputerScience/ACM/I_AM_ACMER/2025/2025.1/2025.1.14/Md",
-      "program": "d:/ComputerScience/ACM/I_AM_ACMER/2025/2025.1/2025.1.14/Md/build/Debug/outDebug",
+      "cwd": "d:/ComputerScience/ACM/CodingFun/WorkSpace",
+      "program": "d:/ComputerScience/ACM/CodingFun/WorkSpace/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

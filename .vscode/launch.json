@@ -2,14 +2,21 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "CodingFun_1486c032"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/ComputerScience/ACM/I_AM_ACMER/2025/2025.1/2025.1.14/Md",
-      "program": "d:/ComputerScience/ACM/I_AM_ACMER/2025/2025.1/2025.1.14/Md/build/Debug/outDebug",
+      "cwd": "d:/ComputerScience/ACM/CodingFun/WorkSpace",
+      "program": "d:/ComputerScience/ACM/CodingFun/WorkSpace/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -13,23 +13,18 @@ void tree(){
 
 void solve(){
     srand(time(0));
-    int _ = 1;
-    cout << _ << endl;
-    int n = 500000;
-    cout << n << endl;
+    int n,k;
+    n = rand() % 10 + 1;
+    k = rand() % n + 1;
+    cout << n << " " << k << endl;
     for (int i = 1;i<n+1;i++){
-        cout << 50 * i << " ";
+        cout << rand() % 10 + 1 << " ";
     }
-    cout << endl;
-    for (int i = 1;i<n+1;i++){
-        cout << 50 * i << " ";
-    }
-    cout << endl;
     return;
 }
 
 signed main(){
-    freopen("input.txt","w",stdout);
+    // freopen("input.txt","w",stdout);
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     int _ = 1;
     // cin >> _;

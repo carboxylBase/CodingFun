@@ -152,6 +152,7 @@
     "semaphore": "cpp",
     "valarray": "cpp",
     "queue": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "stdio.h": "c"
   }
 }
